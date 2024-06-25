@@ -1,4 +1,4 @@
-## menu con el while y la bandera
+
 ## ordenar de mayor a menor sin sorted punto 2 y 3
 ## borrar lineas que no sirvan
 ## optimizar el codigo
@@ -17,7 +17,6 @@ def generar_eventos():
         eventos.append([tipoDeEvento, invitados])
     return eventos
 
-# Generar eventos al inicio
 eventos = generar_eventos()
 print(eventos)
 
@@ -27,6 +26,12 @@ precioAdicional100 = [6500, 7500, 5500, 6500, 6500]
 precioAdicional200 = [7000, 8000, 6000, 7000, 8000]
 costoPorEvento = [160000, 180000, 160000, 170000, 180000]
 totales = []
+
+facturacion_casamiento = cantidad_casamiento = 0
+facturacion_15 = cantidad_15 = 0
+facturacion_cumple = cantidad_cumple = 0
+facturacion_bautismo = cantidad_bautismo = 0
+facturacion_otros = cantidad_otros = 0
 
 for evento in eventos:
     if evento[0] == "casamiento":
@@ -92,14 +97,7 @@ for evento in eventos:
     if costoFacturacion:
         evento.extend([costoFacturacion])
             
-# Crear listas para almacenar la facturación, costo y cantidad de cada tipo de evento
-facturacion_casamiento = cantidad_casamiento = 0
-facturacion_15 = cantidad_15 = 0
-facturacion_cumple = cantidad_cumple = 0
-facturacion_bautismo = cantidad_bautismo = 0
-facturacion_otros = cantidad_otros = 0
 
-# Recorrer la lista de eventos
 for evento in eventos:
     tipoDeEvento, invitados, *_ = evento
 
@@ -124,7 +122,8 @@ for evento in eventos:
         costo_otros = costoPorEvento[4]
         cantidad_otros += 1
             
-# Iniciar el bucle principal
+            
+# Bucle principal
 while bandera:
     print("\nMenú")
     print("1. Total de la facturación del mes, el costo y cuantos eventos fueron")
@@ -133,18 +132,11 @@ while bandera:
     print("4. Ingresar un tipo de evento y mostrar la facturación y cantidad de invitados")
     print("5. Salir\n")
 
-    # Solicitar la opción del usuario
     opcion = (input("Ingrese la opción: "))
-    # Opción 1: Calcular el total de la facturación del mes, el costo y cuantos eventos fueron
+
     if opcion == "1":
         print("You selected option 1")
 
-        # Calcular el costo y la facturación en función del tipo de evento y el número de invitados
-
-            # Agregar el evento a la lista de eventos
-        
-
-        # Calcular los totales
         total_facturacion = 0
         total_costo = 0
         
@@ -156,16 +148,13 @@ while bandera:
             
         total_eventos = len(eventos)
 
-        # Imprimir los totales
         print(f"Total facturación: {total_facturacion}, total costo: {total_costo}, total eventos: {total_eventos}")
         totales.append([total_facturacion, total_eventos])
         print()
-        pass
 
 ##-------------------------------------------------------------------------------##
 
 #PUNTO 2
-
     elif opcion == "2":
         print("You selected option 2")
 
@@ -180,11 +169,10 @@ while bandera:
         def obtener_facturacion(total):
             return total[1]
 
-        # Ordenar la lista por facturación
         totales_ordenados = sorted(totales, key=obtener_facturacion, reverse=True)
 
         for total in totales_ordenados:
-                print(f"Tipo de evento: {total[0]}, Total facturación: {total[1]}, Total costo: {total[2]}, Cantidad de eventos: {total[3]}")        
+            print(f"Tipo de evento: {total[0]}, Total facturación: {total[1]}, Total costo: {total[2]}, Cantidad de eventos: {total[3]}")        
         print()
 
 ##-------------------------------------------------------------------------------##
@@ -192,7 +180,7 @@ while bandera:
 #PUNTO 3
     elif opcion == "3":
         print("You selected option 3")
-        # Ordenar la lista por facturación total PUNTO 3
+
         totales_facturacion = [
             ("casamiento", facturacion_casamiento),
             ("15 años", facturacion_15),
@@ -201,11 +189,9 @@ while bandera:
             ("otros", facturacion_otros),
         ]
 
-        # Define la función de ordenamiento
         def obtener_facturacion_total(ordenado):
             return ordenado[1]
 
-        # Ordena la lista usando la función de ordenamiento
         totales_facturacion_ordenados = sorted(totales_facturacion, key=obtener_facturacion_total, reverse=True)
         for evento in totales_facturacion_ordenados:
             print(f"Tipo de evento: {evento[0]}, Total facturación: {evento[1]}")
@@ -219,19 +205,18 @@ while bandera:
         eventoIngresado = input("Ingrese el tipo de evento: ").lower().strip()
         eventoEncontrado = False
 
-
         for evento in eventos:
             tipoDeEvento, invitados, costoFacturacion = evento
             if eventoIngresado == tipoDeEvento:
                 print("Facturacion del evento:",costoFacturacion, " Cantidad de invitados:",invitados)
                 eventoEncontrado = True
 
-        if eventoEncontrado:  
+        if eventoEncontrado == False:  
             print("No se encontraron eventos de este tipo")
-
         print()
         
 ##-------------------------------------------------------------------------------##
+
 #PUNTO 5
     elif opcion == "5":
         print("You selected option 5")
@@ -240,4 +225,3 @@ while bandera:
 
     else:
         print("Opción no válida")
-        pass
