@@ -7,11 +7,11 @@
 import random
 
 def generar_invitados():
-    return random.randint(50, 201)
+    return random.randint(50, 200)
 
 def generar_eventos():
     eventos = []
-    for _ in range(random.randint(10, 31)):
+    for _ in range(random.randint(10, 30)):
         tipoDeEvento = random.choice(["casamiento", "15 años", "cumpleaños", "bautismo", "otros"])
         invitados = generar_invitados()
         eventos.append([tipoDeEvento, invitados])
@@ -28,6 +28,102 @@ precioAdicional200 = [7000, 8000, 6000, 7000, 8000]
 costoPorEvento = [160000, 180000, 160000, 170000, 180000]
 totales = []
 
+for evento in eventos:
+    if evento[0] == "casamiento":
+        if evento[1] == 50:
+            costoInvitado = costoPorEvento[0] + (50 * 2500)
+        elif 50 < evento[1] <= 100:
+            costoFacturacion = costoPorEvento[0] + (6500 * evento[1])
+            costoInvitado = costoPorEvento[0] + (evento[1] * 2500)
+        elif 100 < evento[1] <= 200:
+            costoFacturacion = costoPorEvento[0] + (7000 * evento[1])
+            costoInvitado = costoPorEvento[0] + (evento[1] * 2500)
+        else:
+            print("Numero de invitados no valido")
+            
+    elif evento[0] == "15 años":
+        if evento[1] == 50:
+            costoInvitado = costoPorEvento[1] + (50 * 2500)
+        elif 50 < evento[1] <= 100:
+            costoFacturacion = costoPorEvento[1] + (7500 * evento[1])
+            costoInvitado = costoPorEvento[1] + (evento[1] * 2500)
+        elif 100 < evento[1] <= 200:
+            costoFacturacion = costoPorEvento[1] + (8000 * evento[1])
+            costoInvitado = costoPorEvento[1] + (evento[1] * 2500)
+        else:
+            print("Numero de invitados no valido")
+            
+    elif evento[0] == "cumpleaños":
+        if evento[1] == 50:
+            costoInvitado = costoPorEvento[2] + (50 * 2500)
+        elif 50 < evento[1] <= 100:
+            costoFacturacion = costoPorEvento[2] + (5500 * evento[1])
+            costoInvitado = costoPorEvento[2] + (evento[1] * 2500)
+        elif 100 < evento[1] <= 200:
+            costoFacturacion = costoPorEvento[2] + (6000 * evento[1])
+            costoInvitado = costoPorEvento[2] + (evento[1] * 2500)
+        else:
+            print("Numero de invitados no valido")
+
+    elif evento[0] == "bautismo":
+        if evento[1] == 50:
+            costoInvitado = costoPorEvento[3] + (50 * 2500)
+        elif 50 < evento[1] <= 100:
+            costoFacturacion = costoPorEvento[3] + (6500 * evento[1])
+            costoInvitado = costoPorEvento[3] + (evento[1] * 2500)
+        elif 100 < evento[1] <= 200:
+            costoFacturacion = costoPorEvento[3] + (7000 * evento[1])
+            costoInvitado = costoPorEvento[3] + (evento[1] * 2500)
+        else:
+            print("Numero de invitados no valido")
+
+    elif evento[0] == "otros":
+        if evento[1] == 50:
+            costoInvitado = costoPorEvento[4] + (50 * 2500)
+        elif 50 < evento[1] <= 100:
+            costoFacturacion = costoPorEvento[4] + (6500 * evento[1])
+            costoInvitado = costoPorEvento[4] + (evento[1] * 2500)
+        elif 100 < evento[1] <= 200:
+            costoFacturacion = costoPorEvento[4] + (7000 * evento[1])
+            costoInvitado = costoPorEvento[4] + (evento[1] * 2500)
+        else:
+            print("Numero de invitados no valido")
+            
+    if costoFacturacion:
+        evento.extend([costoFacturacion])
+            
+# Crear listas para almacenar la facturación, costo y cantidad de cada tipo de evento
+facturacion_casamiento = cantidad_casamiento = 0
+facturacion_15 = cantidad_15 = 0
+facturacion_cumple = cantidad_cumple = 0
+facturacion_bautismo = cantidad_bautismo = 0
+facturacion_otros = cantidad_otros = 0
+
+# Recorrer la lista de eventos
+for evento in eventos:
+    tipoDeEvento, invitados, *_ = evento
+
+    if tipoDeEvento == "casamiento":
+        facturacion_casamiento += costoFacturacion
+        costo_casamiento = costoPorEvento[0]
+        cantidad_casamiento += 1
+    elif tipoDeEvento == "15 años":
+        facturacion_15 += costoFacturacion
+        costo_15 = costoPorEvento[1]
+        cantidad_15 += 1
+    elif tipoDeEvento == "cumpleaños":
+        facturacion_cumple += costoFacturacion
+        costo_cumple = costoPorEvento[2]
+        cantidad_cumple += 1
+    elif tipoDeEvento == "bautismo":
+        facturacion_bautismo += costoFacturacion
+        costo_bautismo = costoPorEvento[3]
+        cantidad_bautismo += 1
+    else:
+        facturacion_otros += costoFacturacion
+        costo_otros = costoPorEvento[4]
+        cantidad_otros += 1
+            
 # Iniciar el bucle principal
 while bandera:
     print("\nMenú")
@@ -44,70 +140,8 @@ while bandera:
         print("You selected option 1")
 
         # Calcular el costo y la facturación en función del tipo de evento y el número de invitados
-        for evento in eventos:
-            if evento[0] == "casamiento":
-                if evento[1] == 50:
-                    costoInvitado = costoPorEvento[0] + (50 * 2500)
-                elif 50 < evento[1] <= 100:
-                    costoFacturacion = costoPorEvento[0] + (6500 * evento[1])
-                    costoInvitado = costoPorEvento[0] + (evento[1] * 2500)
-                elif 100 < evento[1] <= 200:
-                    costoFacturacion = costoPorEvento[0] + (7000 * evento[1])
-                    costoInvitado = costoPorEvento[0] + (evento[1] * 2500)
-                else:
-                    print("Numero de invitados no valido")
-                    
-            elif evento[0] == "15 años":
-                if evento[1] == 50:
-                    costoInvitado = costoPorEvento[1] + (50 * 2500)
-                elif 50 < evento[1] <= 100:
-                    costoFacturacion = costoPorEvento[1] + (7500 * evento[1])
-                    costoInvitado = costoPorEvento[1] + (evento[1] * 2500)
-                elif 100 < evento[1] <= 200:
-                    costoFacturacion = costoPorEvento[1] + (8000 * evento[1])
-                    costoInvitado = costoPorEvento[1] + (evento[1] * 2500)
-                else:
-                    print("Numero de invitados no valido")
-                    
-            elif evento[0] == "cumpleaños":
-                if evento[1] == 50:
-                    costoInvitado = costoPorEvento[2] + (50 * 2500)
-                elif 50 < evento[1] <= 100:
-                    costoFacturacion = costoPorEvento[2] + (5500 * evento[1])
-                    costoInvitado = costoPorEvento[2] + (evento[1] * 2500)
-                elif 100 < evento[1] <= 200:
-                    costoFacturacion = costoPorEvento[2] + (6000 * evento[1])
-                    costoInvitado = costoPorEvento[2] + (evento[1] * 2500)
-                else:
-                    print("Numero de invitados no valido")
-
-            elif evento[0] == "bautismo":
-                if evento[1] == 50:
-                    costoInvitado = costoPorEvento[3] + (50 * 2500)
-                elif 50 < evento[1] <= 100:
-                    costoFacturacion = costoPorEvento[3] + (6500 * evento[1])
-                    costoInvitado = costoPorEvento[3] + (evento[1] * 2500)
-                elif 100 < evento[1] <= 200:
-                    costoFacturacion = costoPorEvento[3] + (7000 * evento[1])
-                    costoInvitado = costoPorEvento[3] + (evento[1] * 2500)
-                else:
-                    print("Numero de invitados no valido")
-
-            elif evento[0] == "otros":
-                if evento[1] == 50:
-                    costoInvitado = costoPorEvento[4] + (50 * 2500)
-                elif 50 < evento[1] <= 100:
-                    costoFacturacion = costoPorEvento[4] + (6500 * evento[1])
-                    costoInvitado = costoPorEvento[4] + (evento[1] * 2500)
-                elif 100 < evento[1] <= 200:
-                    costoFacturacion = costoPorEvento[4] + (7000 * evento[1])
-                    costoInvitado = costoPorEvento[4] + (evento[1] * 2500)
-                else:
-                    print("Numero de invitados no valido")
 
             # Agregar el evento a la lista de eventos
-            # if costo and costoFacturacion:
-            #     evento.extend([costo, costoFacturacion])
         
 
         # Calcular los totales
@@ -117,8 +151,8 @@ while bandera:
         for evento in eventos:
             total_facturacion += costoFacturacion
             
-        # for evento in eventos:
-        #     total_costo += evento[2]
+        for evento in eventos:
+            total_costo += costoInvitado
             
         total_eventos = len(eventos)
 
@@ -134,38 +168,6 @@ while bandera:
 
     elif opcion == "2":
         print("You selected option 2")
-# Crear listas para almacenar la facturación, costo y cantidad de cada tipo de evento
-        facturacion_casamiento = cantidad_casamiento = 0
-        facturacion_15 = cantidad_15 = 0
-        facturacion_cumple = cantidad_cumple = 0
-        facturacion_bautismo = cantidad_bautismo = 0
-        facturacion_otros = cantidad_otros = 0
-
-        # Recorrer la lista de eventos
-        for evento in eventos:
-            tipoDeEvento, invitados, costo, costoFacturacion = evento
-
-            # Agregar la facturación y el costo al tipo de evento correspondiente
-            if tipoDeEvento == "casamiento":
-                facturacion_casamiento += costoFacturacion
-                costo_casamiento = costoPorEvento[0]
-                cantidad_casamiento += 1
-            elif tipoDeEvento == "15 años":
-                facturacion_15 += costoFacturacion
-                costo_15 = costoPorEvento[1]
-                cantidad_15 += 1
-            elif tipoDeEvento == "cumpleaños":
-                facturacion_cumple += costoFacturacion
-                costo_cumple = costoPorEvento[2]
-                cantidad_cumple += 1
-            elif tipoDeEvento == "bautismo":
-                facturacion_bautismo += costoFacturacion
-                costo_bautismo = costoPorEvento[3]
-                cantidad_bautismo += 1
-            else:
-                facturacion_otros += costoFacturacion
-                costo_otros = costoPorEvento[4]
-                cantidad_otros += 1
 
         totales = [
             ("casamiento", facturacion_casamiento, costo_casamiento, cantidad_casamiento),
@@ -174,8 +176,6 @@ while bandera:
             ("bautismo", facturacion_bautismo, costo_bautismo, cantidad_bautismo),
             ("otros", facturacion_otros, costo_otros, cantidad_otros),
         ]
-
-        print("somos la lista eventos",eventos)
 
         def obtener_facturacion(total):
             return total[1]
@@ -186,10 +186,6 @@ while bandera:
         for total in totales_ordenados:
                 print(f"Tipo de evento: {total[0]}, Total facturación: {total[1]}, Total costo: {total[2]}, Cantidad de eventos: {total[3]}")        
         print()
-
-        # # Definir una función para obtener la facturación de un total
-        # print("Los totales ordenados son: ", totales_ordenados)
-        # print()   
 
 ##-------------------------------------------------------------------------------##
 
@@ -221,15 +217,17 @@ while bandera:
     elif opcion == "4":
         print("You selected option 4")
         eventoIngresado = input("Ingrese el tipo de evento: ").lower().strip()
+        eventoEncontrado = False
+
 
         for evento in eventos:
-            tipoDeEvento, invitados, costo, costoFacturacion = evento
+            tipoDeEvento, invitados, costoFacturacion = evento
             if eventoIngresado == tipoDeEvento:
                 print("Facturacion del evento:",costoFacturacion, " Cantidad de invitados:",invitados)
+                eventoEncontrado = True
 
-        if eventoIngresado != tipoDeEvento or costoFacturacion == 0:
-                print("No se encontraron eventos de este tipo")
-                pass
+        if eventoEncontrado:  
+            print("No se encontraron eventos de este tipo")
 
         print()
         
