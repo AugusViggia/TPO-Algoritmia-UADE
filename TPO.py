@@ -1,9 +1,3 @@
-
-## ordenar de mayor a menor sin sorted punto 2 y 3
-## borrar lineas que no sirvan
-## optimizar el codigo
-
-
 import random
 
 def generar_invitados():
@@ -18,7 +12,6 @@ def generar_eventos():
     return eventos
 
 eventos = generar_eventos()
-print(eventos)
 
 bandera = True
 precioFijo50 = [750000, 850000, 650000, 750000, 800000]
@@ -97,7 +90,6 @@ for evento in eventos:
     if costoFacturacion:
         evento.extend([costoFacturacion])
             
-
 for evento in eventos:
     tipoDeEvento, invitados, *_ = evento
 
@@ -122,8 +114,6 @@ for evento in eventos:
         costo_otros = costoPorEvento[4]
         cantidad_otros += 1
             
-            
-# Bucle principal
 while bandera:
     print("\nMenú")
     print("1. Total de la facturación del mes, el costo y cuantos eventos fueron")
@@ -135,7 +125,7 @@ while bandera:
     opcion = (input("Ingrese la opción: "))
 
     if opcion == "1":
-        print("You selected option 1")
+        print("Seleccionaste la opcion 1")
 
         total_facturacion = 0
         total_costo = 0
@@ -152,11 +142,8 @@ while bandera:
         totales.append([total_facturacion, total_eventos])
         print()
 
-##-------------------------------------------------------------------------------##
-
-#PUNTO 2
     elif opcion == "2":
-        print("You selected option 2")
+        print("Seleccionaste la opcion 2")
 
         totales = [
             ("casamiento", facturacion_casamiento, costo_casamiento, cantidad_casamiento),
@@ -168,18 +155,16 @@ while bandera:
 
         def obtener_facturacion(total):
             return total[1]
-
-        totales_ordenados = sorted(totales, key=obtener_facturacion, reverse=True)
-
-        for total in totales_ordenados:
-            print(f"Tipo de evento: {total[0]}, Total facturación: {total[1]}, Total costo: {total[2]}, Cantidad de eventos: {total[3]}")        
+        
+        for i in range(len(totales)):
+            for j in range(i + 1, len(totales)):
+                if totales[i][1] < totales[j][1]:
+                    totales[i], totales[j] = totales[j], totales[i]
+            print(f"Tipo de evento: {totales[i][0]}, Total facturación: {totales[i][1]}, Total costo: {totales[i][2]}, Cantidad de eventos: {totales[i][3]}")
         print()
 
-##-------------------------------------------------------------------------------##
-
-#PUNTO 3
     elif opcion == "3":
-        print("You selected option 3")
+        print("Seleccionaste la opcion 3")
 
         totales_facturacion = [
             ("casamiento", facturacion_casamiento),
@@ -192,16 +177,15 @@ while bandera:
         def obtener_facturacion_total(ordenado):
             return ordenado[1]
 
-        totales_facturacion_ordenados = sorted(totales_facturacion, key=obtener_facturacion_total, reverse=True)
-        for evento in totales_facturacion_ordenados:
-            print(f"Tipo de evento: {evento[0]}, Total facturación: {evento[1]}")
+        for i in range(len(totales_facturacion)):
+            for j in range(i + 1, len(totales_facturacion)):
+                if totales_facturacion[i][1] < totales_facturacion[j][1]:
+                    totales_facturacion[i], totales_facturacion[j] = totales_facturacion[j], totales_facturacion[i]
+            print(f"Tipo de evento: {totales_facturacion[i][0]}, Total facturación: {totales_facturacion[i][1]}")
         print()
 
-##-------------------------------------------------------------------------------##
-
-#Punto 4
     elif opcion == "4":
-        print("You selected option 4")
+        print("Seleccionaste la opcion 4")
         eventoIngresado = input("Ingrese el tipo de evento: ").lower().strip()
         eventoEncontrado = False
 
@@ -215,11 +199,8 @@ while bandera:
             print("No se encontraron eventos de este tipo")
         print()
         
-##-------------------------------------------------------------------------------##
-
-#PUNTO 5
     elif opcion == "5":
-        print("You selected option 5")
+        print("Seleccionaste la opcion 5")
         bandera = False
         print("Gracias por utilizar el programa")
 
