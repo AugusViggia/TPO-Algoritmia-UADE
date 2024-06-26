@@ -1,8 +1,17 @@
+#TPO 7 - SALON DE FIESTAS -
+
+# Viggiano, Augusto
+# Villanueva, Camilo
+# Zolezzi, Juan
+
+# Se pide realizar un programa que permita gestionar la facturación de un salón de fiestas.
+
 import random
 
 def generar_invitados():
     return random.randint(50, 200)
 
+# Se generan eventos aleatorios con un tipo de evento y una cantidad de invitados.
 def generar_eventos():
     eventos = []
     for _ in range(random.randint(10, 30)):
@@ -11,6 +20,7 @@ def generar_eventos():
         eventos.append([tipoDeEvento, invitados])
     return eventos
 
+# Se generan los eventos.
 eventos = generar_eventos()
 
 bandera = True
@@ -25,6 +35,8 @@ facturacion_15 = cantidad_15 = 0
 facturacion_cumple = cantidad_cumple = 0
 facturacion_bautismo = cantidad_bautismo = 0
 facturacion_otros = cantidad_otros = 0
+
+# Se calcula el costo de cada evento.
 
 for evento in eventos:
     if evento[0] == "casamiento":
@@ -88,8 +100,9 @@ for evento in eventos:
             print("Numero de invitados no valido")
             
     if costoFacturacion:
-        evento.extend([costoFacturacion])
-            
+        evento.append(costoFacturacion)
+
+# Se calcula la facturación total de cada tipo de evento.
 for evento in eventos:
     tipoDeEvento, invitados, *_ = evento
 
@@ -114,6 +127,7 @@ for evento in eventos:
         costo_otros = costoPorEvento[4]
         cantidad_otros += 1
             
+# Se muestra el menú.
 while bandera:
     print("\nMenú")
     print("1. Total de la facturación del mes, el costo y cuantos eventos fueron")
@@ -122,6 +136,7 @@ while bandera:
     print("4. Ingresar un tipo de evento y mostrar la facturación y cantidad de invitados")
     print("5. Salir\n")
 
+# Se pide al usuario que ingrese una opción.
     opcion = (input("Ingrese la opción: "))
 
     if opcion == "1":
@@ -130,6 +145,7 @@ while bandera:
         total_facturacion = 0
         total_costo = 0
         
+# Se calcula la facturación total, el costo total y la cantidad de eventos.
         for evento in eventos:
             total_facturacion += costoFacturacion
             
@@ -153,8 +169,8 @@ while bandera:
             ("otros", facturacion_otros, costo_otros, cantidad_otros),
         ]
 
-        def obtener_facturacion(total):
-            return total[1]
+# Se ordenan los eventos de mayor a menor.
+
         
         for i in range(len(totales)):
             for j in range(i + 1, len(totales)):
@@ -174,9 +190,7 @@ while bandera:
             ("otros", facturacion_otros),
         ]
 
-        def obtener_facturacion_total(ordenado):
-            return ordenado[1]
-
+# Se ordenan los eventos de mayor a menor.
         for i in range(len(totales_facturacion)):
             for j in range(i + 1, len(totales_facturacion)):
                 if totales_facturacion[i][1] < totales_facturacion[j][1]:
@@ -189,16 +203,19 @@ while bandera:
         eventoIngresado = input("Ingrese el tipo de evento: ").lower().strip()
         eventoEncontrado = False
 
+# Se busca el evento ingresado por el usuario.
         for evento in eventos:
             tipoDeEvento, invitados, costoFacturacion = evento
             if eventoIngresado == tipoDeEvento:
                 print("Facturacion del evento:",costoFacturacion, " Cantidad de invitados:",invitados)
                 eventoEncontrado = True
 
+# Se muestra un mensaje si no se encontraron eventos.
         if eventoEncontrado == False:  
             print("No se encontraron eventos de este tipo")
         print()
         
+# Se finaliza el programa.
     elif opcion == "5":
         print("Seleccionaste la opcion 5")
         bandera = False
